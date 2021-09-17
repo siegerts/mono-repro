@@ -1,0 +1,155 @@
+{
+  "version": 2,
+  "projects": {
+    "mono-repro": {
+      "root": "apps/mono-repro",
+      "sourceRoot": "apps/mono-repro",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/next:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "root": "apps/mono-repro",
+            "outputPath": "dist/apps/mono-repro"
+          },
+          "configurations": {
+            "production": {}
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/next:server",
+          "options": {
+            "buildTarget": "mono-repro:build",
+            "dev": true
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "mono-repro:build:production",
+              "dev": false
+            }
+          }
+        },
+        "export": {
+          "executor": "@nrwl/next:export",
+          "options": {
+            "buildTarget": "mono-repro:build:production"
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/mono-repro"],
+          "options": {
+            "jestConfig": "apps/mono-repro/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/mono-repro/**/*.{ts,tsx,js,jsx}"]
+          }
+        }
+      }
+    },
+    "mono-repro-e2e": {
+      "root": "apps/mono-repro-e2e",
+      "sourceRoot": "apps/mono-repro-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/mono-repro-e2e/cypress.json",
+            "devServerTarget": "mono-repro:serve",
+            "tsConfig": "apps/mono-repro-e2e/tsconfig.json"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "mono-repro:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/mono-repro-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
+    "mrb-ui": {
+      "root": "libs/mrb-ui",
+      "sourceRoot": "libs/mrb-ui/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/mrb-ui/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/mrb-ui"],
+          "options": {
+            "jestConfig": "libs/mrb-ui/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "storybook": {
+          "executor": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/react",
+            "port": 4400,
+            "staticDir": ["libs/mrb-ui/public"],
+            "config": {
+              "configFolder": "libs/mrb-ui/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "executor": "@nrwl/storybook:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "uiFramework": "@storybook/react",
+            "outputPath": "dist/storybook/mrb-ui",
+            "config": {
+              "configFolder": "libs/mrb-ui/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/next"
+  },
+  "generators": {
+    "@nrwl/react": {
+      "application": {
+        "babel": true
+      }
+    },
+    "@nrwl/next": {
+      "application": {
+        "style": "styled-jsx",
+        "linter": "eslint"
+      }
+    }
+  },
+  "defaultProject": "mono-repro"
+}

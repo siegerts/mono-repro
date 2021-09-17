@@ -1,0 +1,60 @@
+@font-face {
+    font-family: 'Urbane';
+    font-style: normal;
+    font-weight: normal;
+    src: url('https://www.getmarvia.com/hubfs/Fonts/Urbane-Medium%20(Admin%20only)/font.woff2') format('woff');
+}
+
+@font-face {
+    font-family: 'Urbane';
+    font-style: normal;
+    font-weight: 600;
+    src: url('https://www.getmarvia.com/hubfs/Fonts/Urbane-DemiBold/font.woff2') format('woff');
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    --font-family: "Urbane", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-family: var(--font-family);
+    color: var(--primary-color-100);
+    padding: 0;
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+a {
+    text-decoration: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.5rem;
+    color: inherit;
+}
+
+h1 {
+    font-size: 2rem;
+    line-height: 3rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+    line-height: 2.25rem;
+}
+
+h3 {
+    font-size: 1.125rem;
+    line-height: 1.6875rem;
+}
+
+p {
+    line-height: 1.5;
+    margin: 0;
+}
