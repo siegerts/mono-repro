@@ -1,6 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const withNx = require('@nrwl/next/plugins/with-nx');
-const { i18n } = require('./next-i18next.config');
 
 const securityHeaders = [
   {
@@ -23,7 +22,10 @@ const securityHeaders = [
 ];
 
 const nextConfig = {
-  i18n,
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'de', 'nl', 'fr'],
+  },
   jsconfigPaths: true,
   headers: async () => securityHeaders,
   images: {
